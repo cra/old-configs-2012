@@ -40,23 +40,9 @@ matter to us.
 
 defbindings("WScreen", {
     bdoc("Navigate to the left/right workspace."),
-    kpress(ALTMETA.."Shift+Left", "WScreen.switch_prev(_)"),
-    kpress(ALTMETA.."Shift+Right", "WScreen.switch_next(_)"),
-    kpress(ALTMETA.."Shift+H", "WScreen.switch_prev(_)"),
-    kpress(ALTMETA.."Shift+N", "WScreen.switch_next(_)"),
-
-    bdoc("Navigate workspaces using a Dvorak grid-based metaphor."),
-    kpress(ALTMETA.."1", "WScreen.switch_nth(_, 0)"),
-    kpress(ALTMETA.."2", "WScreen.switch_nth(_, 1)"),
-    kpress(ALTMETA.."3", "WScreen.switch_nth(_, 2)"),
-    kpress(ALTMETA.."apostrophe", "WScreen.switch_nth(_, 3)"),
-    kpress(ALTMETA.."comma", "WScreen.switch_nth(_, 4)"),
-    kpress(ALTMETA.."period", "WScreen.switch_nth(_, 5)"),
-    kpress(ALTMETA.."A", "WScreen.switch_nth(_, 6)"),
-    kpress(ALTMETA.."O", "WScreen.switch_nth(_, 7)"),
-    kpress(ALTMETA.."E", "WScreen.switch_nth(_, 8)"),
-    kpress(ALTMETA.."U", "WScreen.switch_nth(_, 9)"),
-
+    kpress(META.."period", "WScreen.switch_prev(_)"),
+    kpress(ALTMETA.."s", "WScreen.switch_prev(_)"),
+    kpress(ALTMETA.."u", "WScreen.switch_next(_)"),
 })
 
 defbindings("WMPlex", {
@@ -66,20 +52,31 @@ defbindings("WMPlex", {
     bdoc("Query for command line to execute."),
     kpress(ALTMETA.."R", "mod_query.query_exec(_)"),
 
-    bdoc("Query for host to connect to with SSH."),
-    kpress(ALTMETA.."S", "mod_query.query_ssh(_, ':ssh')"),
-
 })
+
+
+function toggle_tabbar(fr)
+  if WFrame.mode(fr)=="tiled-alt"
+      then
+          WFrame.set_mode(fr,"tiled")
+      else
+          WFrame.set_mode(fr,"tiled-alt")
+  end
+end
+
 
 defbindings("WFrame", {
 
     -- An exercise for my little finger, heh :)
     bdoc("Switch to next/previous object within the frame."),
-    kpress(ALTMETA.."at", "WFrame.switch_next(_)"),
-    kpress(ALTMETA.."slash", "WFrame.switch_prev(_)"),
+    kpress(META.."a", "WFrame.switch_prev(_)"),
+    kpress(META.."t", "WFrame.switch_next(_)"),
 
     bdoc("Attach tagged frames."),
     kpress(META.."Shift+T", "ioncore.tagged_attach(_)"),
+    
+    bdoc("Toggle tabheader"),
+    mpress(ALTMETA.."Button2", "toggle_tabbar(_)"),
  })
 
 -- ionws
@@ -98,10 +95,10 @@ defbindings("WTiling", {
 ]]--
 
     bdoc("Go to frame above/below/right/left of current frame."),
-    kpress(ALTMETA.."C", "ioncore.goto_next(_sub, 'up', {no_ascend=_})"),
-    kpress(ALTMETA.."T", "ioncore.goto_next(_sub, 'down', {no_ascend=_})"),
+    kpress(ALTMETA.."e", "ioncore.goto_next(_sub, 'up', {no_ascend=_})"),
+    kpress(ALTMETA.."h", "ioncore.goto_next(_sub, 'down', {no_ascend=_})"),
 
-    kpress(ALTMETA.."H", "ioncore.goto_next(_sub, 'left', {no_ascend=_})"),
-    kpress(ALTMETA.."N", "ioncore.goto_next(_sub, 'right', {no_ascend=_})")
+    kpress(ALTMETA.."a", "ioncore.goto_next(_sub, 'left', {no_ascend=_})"),
+    kpress(ALTMETA.."t", "ioncore.goto_next(_sub, 'right', {no_ascend=_})")
 })
 
