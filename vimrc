@@ -1,3 +1,4 @@
+" TEST code code code
 "set smartcase
 set viminfo='10,"100,:20,%,n~/.viminfo
 " when we reload, tell vim to restore the cursor to the saved position
